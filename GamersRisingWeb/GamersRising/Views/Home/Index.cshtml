@@ -1,0 +1,43 @@
+﻿@using GamersRising.Data;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+
+}
+else
+{
+
+    <div class="text-center">
+        <h1 class="display-4">LOG IN NOW</h1>
+    </div>
+
+}
+
+
+<div class="modal fade" id="loginDrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <partial name="_UserLoginPartial" />
+</div>
+
+<div class="modal fade" id="RegistrationDrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <partial name="_UserRegistrationPartial" />
+</div>
+
+@section Scripts{
+
+    <script src="~/js/userregistration.js"></script>
+    <script src="~/js/userlogin.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

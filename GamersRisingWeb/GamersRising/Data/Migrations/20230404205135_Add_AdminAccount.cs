@@ -1,0 +1,60 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Migrations;
+using System.Text;
+
+#nullable disable
+
+namespace GamersRising.Data.Migrations
+{
+    /// <inheritdoc />
+    public partial class Add_AdminAccount : Migration
+    {
+        const string ADMIN_USER_GUID = "72c7bba8-637c-45fe-8cff-3e8d3786b26b";
+        const string ADMIN_ROLE_GUID = "333aa727-0c70-4814-8b77-b06c0998cb66";
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            var hasher = new PasswordHasher<ApplicationUser>();
+            var passwordHash = hasher.HashPassword(null, "Password100");//Todo: Hide Password
+
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("INSERT INTO AspNetUsers(Id, UserName, NormalizedUserName,Email,EmailConfirmed,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnabled,AccessFailedCount,NormalizedEmail,PasswordHash,SecurityStamp,DateOfBirth,FullName)");
+            sb.AppendLine("VALUES(");
+            sb.AppendLine($"'{ADMIN_USER_GUID}'");
+            sb.AppendLine(",'tjfrags.admin@gamersrising.com'");
+            sb.AppendLine(",'TJFRAGS.ADMIN@GAMERSRISING.COM'");
+            sb.AppendLine(",'tjfrags.admin@gamersrising.com'");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(", 0");
+            sb.AppendLine(",'TJFRAGS.ADMIN@GAMERSRISING.COM'");
+            sb.AppendLine($", '{passwordHash}'");
+            sb.AppendLine(", ''");
+            sb.AppendLine(",'0123598'");
+            sb.AppendLine(",'Tadiwa'");
+            sb.AppendLine(")");
+
+            migrationBuilder.Sql(sb.ToString());
+
+            migrationBuilder.Sql($"INSERT INTO AspNetRoles (Id, Name, NormalizedName) VALUES ('{ADMIN_ROLE_GUID}','Admin','ADMIN')");
+
+            migrationBuilder.Sql($"INSERT INTO AspNetUserRoles (UserId, RoleId) VALUES ('{ADMIN_USER_GUID}','{ADMIN_ROLE_GUID}')");
+
+
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.Sql($"DELETE FROM AspNetUserRoles WHERE UserId = '{ADMIN_USER_GUID}' AND RoleId = '{ADMIN_ROLE_GUID}'");
+
+            migrationBuilder.Sql($"DELETE FROM AspNetUsers WHERE Id = '{ADMIN_USER_GUID}'");
+
+            migrationBuilder.Sql($"DELETE FROM AspNetRoles WHERE Id = '{ADMIN_ROLE_GUID}'");
+        }
+    }
+}

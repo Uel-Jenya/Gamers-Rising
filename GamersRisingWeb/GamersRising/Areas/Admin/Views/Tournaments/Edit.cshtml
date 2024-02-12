@@ -1,0 +1,66 @@
+﻿@model GamersRising.Entities.Tournament
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Tournament</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="GameId"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TournamentFormatId" class="control-label"></label>
+                <select asp-for="TournamentFormatId" class="form-control" asp-items="@Model.TournamentFormats"></select>
+                <span asp-validation-for="TournamentFormatId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TournamentModeId" class="control-label"></label>
+                <select asp-for="TournamentModeId" class="form-control" asp-items="@Model.TournamentModes"></select>
+                <span asp-validation-for="TournamentModeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TournamentTypeId" class="control-label"></label>
+                <select asp-for="TournamentTypeId" class="form-control" asp-items="@Model.TournamentTypes"></select>
+                <span asp-validation-for="TournamentTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" placeholder="Select date and time" class="datetimeselector form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" class="datetimeselector form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-gameId="@Model.GameId">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

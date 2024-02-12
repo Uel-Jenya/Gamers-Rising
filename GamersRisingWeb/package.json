@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@eonasdan/tempus-dominus": "^6.4.4",
+    "@fortawesome/fontawesome-free": "^6.3.0",
+    "@popperjs/core": "^2.11.6",
+    "flatpickr": "^4.6.13"
+  }
+}

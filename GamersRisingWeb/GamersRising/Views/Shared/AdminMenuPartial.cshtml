@@ -1,0 +1,33 @@
+﻿@using GamersRising.Data;
+@using Microsoft.AspNetCore.Identity;
+
+
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+{
+    
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Games" asp-action="Index">Games</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Tournaments" asp-action="Index">Tournaments</a>
+    </li
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="TournamentTypes" asp-action="Index">Tournament Types</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="TournamentFormats" asp-action="Index">Tournament Formats</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="TournamentModes" asp-action="Index">Tournament Modes</a>
+    </li>
+
+}

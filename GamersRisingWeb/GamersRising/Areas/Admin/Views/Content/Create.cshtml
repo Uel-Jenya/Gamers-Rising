@@ -1,0 +1,50 @@
+﻿@model GamersRising.Entities.Content
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@Html.ValidationSummary()
+
+<h1>Create</h1>
+
+<h4>Content</h4>
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create">
+            <input type="hidden" asp-for="GameId"/>
+            <input type="hidden" asp-for="TourneyId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="VideoLink" class="control-label"></label>
+                <input asp-for="VideoLink" class="form-control" />
+                <span asp-validation-for="VideoLink" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HTMLContent" class="control-label"></label>
+                <textarea rows="10" asp-for="HTMLContent" class="form-control"></textarea>
+                <span asp-validation-for="HTMLContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Tournaments" asp-action="Index" asp-route-gameId="@Model.GameId">Back to Tournaments</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
