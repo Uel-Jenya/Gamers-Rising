@@ -1,6 +1,8 @@
 # Gamers Rising
 
-Gamers Rising is an ASP.NET Core MVC web app for managing games and tournaments, with authentication and an admin area for content management.
+## What is this project?
+
+Gamers Rising is an ASP.NET Core MVC web application focused on organizing gaming content. It lets teams manage games and tournaments, publish related tournament content, and control admin access through role-based authorization.
 
 ## Tech Stack
 
